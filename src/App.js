@@ -21,7 +21,7 @@ function App() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    setPlayers([...players, { formVal }]);
+    setPlayers([...players, formVal]);
     // const players = [formVal];
   };
 
@@ -95,8 +95,8 @@ function App() {
           SUBMIT
         </button>
       </form>
-      {players.map((player) => {
-        return <ViewPlayers key={player.id} player={player} />;
+      {players.map((player, index) => {
+        return <ViewPlayers key={index} player={player} />;
       })}
     </div>
   );
