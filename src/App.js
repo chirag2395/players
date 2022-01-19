@@ -1,17 +1,20 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ViewPlayers from "./ViewPlayers.js";
+import "./style.css";
 
 function App() {
   //const initialVal = { name: "", fathername: "", age: "" };
   const [players, setPlayers] = useState([]);
+  const [flag, setFlag] = useState(false);
+  const [formError, setError] = useState({});
 
   const [formVal, setformVal] = useState({
-    id: 1,
-    name: "chirag",
-    fathername: "jaga",
-    age: "23",
+    id: "",
+    name: "",
+    fathername: "",
+    age: "",
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,6 +26,27 @@ function App() {
 
     setPlayers([...players, formVal]);
     // const players = [formVal];
+    setError(validation(formVal));
+
+    setFlag(true);
+  };
+  const validation = (values) => {
+    console.log(values);
+    const errors = {};
+    if (!values.id) {
+      errors.id = "ID field cannot be empty";
+    }
+    if (!values.name) {
+      errors.name = "name field cannot be empty";
+    }
+    if (!values.fathername) {
+      errors.fathername = "fathername field cannot be empty";
+    }
+    if (!values.age) {
+      errors.age = "age field cannot be empty";
+    }
+
+    return errors;
   };
 
   return (
@@ -42,20 +66,21 @@ function App() {
     //     </a>
     //   </header>
     // </div>
-    <div>
-      <pre>{JSON.stringify(formVal, undefined, 2)}</pre>
-
-      <form>
-        <label>
+    <div className="body">
+      {flag ? <p>enrolled</p> : <p>not enrolled because fields are empty</p>}
+      <form className="form">
+        <label className="labels">
           ID:
           <input
+            className="fields"
             type="text"
             name="id"
             value={formVal.id}
             onChange={handleChange}
           ></input>
         </label>
-        <label>
+        <p>{formError.id}</p>
+        <label className="labels">
           NAME:
           <input
             type="text"
@@ -64,7 +89,8 @@ function App() {
             onChange={handleChange}
           ></input>
         </label>
-        <label>
+        <p>{formError.name}</p>
+        <label className="labels">
           FATHER NAME:
           <input
             type="text"
@@ -73,7 +99,8 @@ function App() {
             onChange={handleChange}
           ></input>
         </label>
-        <label>
+        <p>{formError.fathername}</p>
+        <label className="labels">
           AGE:
           <input
             type="text"
@@ -82,6 +109,7 @@ function App() {
             onChange={handleChange}
           ></input>
         </label>
+        <p>{formError.age}</p>
         {/* <label>
           {" "}
           SEX:

@@ -1,0 +1,23 @@
+.body {
+  border: 2px;
+  text-align: center;
+}
+
+.labels {
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+}
+.fields {
+  display: flex;
+}
+
+.form {
+  border-radius: 5px;
+
+  background-color: #f2f2f2;
+  margin-left: 400px;
+
+  margin-right: 400px;
+  margin-bottom: 10%;
+}
